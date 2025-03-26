@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Sharing</title>
     <style>
-        /* Default (Dark) Theme */
+        /* Default Dark Theme */
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
@@ -21,25 +21,28 @@
         }
 
         .container {
-            max-width: 380px; /* Reduced size */
+            max-width: 340px; /* Smaller size */
             width: 90%;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             background: #1e1e1e;
-            box-shadow: 0 6px 15px rgba(0, 212, 255, 0.2);
+            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.15);
             position: relative;
             transition: all 0.3s ease-in-out;
-            height: 320px; /* Fixed smaller height */
+            height: 300px; /* Fixed height */
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         /* Theme Toggle Button */
         .theme-toggle {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 35px;
-            height: 18px;
+            top: 8px;
+            right: 8px;
+            width: 32px;
+            height: 16px;
             background: #333;
             border-radius: 12px;
             cursor: pointer;
@@ -50,8 +53,8 @@
         }
 
         .theme-toggle .circle {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             background: white;
             border-radius: 50%;
             transition: transform 0.3s ease-in-out;
@@ -65,7 +68,7 @@
 
         .light-theme .container {
             background: white;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .light-theme .theme-toggle {
@@ -73,7 +76,7 @@
         }
 
         .light-theme .theme-toggle .circle {
-            transform: translateX(16px);
+            transform: translateX(14px);
             background: black;
         }
 
@@ -81,16 +84,16 @@
         .toggle-buttons {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 15px;
-            padding: 6px;
+            margin-bottom: 12px;
+            padding: 4px;
             border-radius: 8px;
-            gap: 8px;
+            gap: 6px;
         }
 
         .toggle-buttons button {
             flex: 1;
-            padding: 10px;
-            font-size: 14px;
+            padding: 8px;
+            font-size: 12px;
             cursor: pointer;
             border: none;
             background: #292929;
@@ -120,16 +123,18 @@
         }
 
         .section.active {
-            display: block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         /* Inputs & Buttons */
         input, button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
+            width: 95%;
+            padding: 8px;
+            margin-top: 8px;
             border-radius: 6px;
-            font-size: 14px;
+            font-size: 12px;
             transition: all 0.3s ease-in-out;
         }
 
@@ -142,7 +147,7 @@
         input:focus {
             border-color: #00d4ff;
             outline: none;
-            box-shadow: 0 0 6px rgba(0, 212, 255, 0.6);
+            box-shadow: 0 0 4px rgba(0, 212, 255, 0.5);
         }
 
         .light-theme input {
@@ -156,7 +161,7 @@
             color: white;
             border: none;
             font-weight: bold;
-            font-size: 14px;
+            font-size: 12px;
             cursor: pointer;
         }
 
@@ -171,8 +176,8 @@
 
         /* Status and Links */
         #upload-status, #file-code, #download-link {
-            margin-top: 10px;
-            font-size: 13px;
+            margin-top: 8px;
+            font-size: 11px;
             font-weight: bold;
         }
 
@@ -203,7 +208,7 @@
             <div class="circle"></div>
         </div>
 
-        <h3>File Sharing</h3>
+        <h4>File Sharing</h4>
         <div class="toggle-buttons">
             <button id="upload-btn" class="active" onclick="toggleSection('upload')">Upload</button>
             <button id="download-btn" onclick="toggleSection('download')">Download</button>
@@ -211,7 +216,7 @@
 
         <!-- Upload Section -->
         <div id="upload" class="section active">
-            <h4>Upload File</h4>
+            <h5>Upload File</h5>
             <input type="file" id="file-input">
             <button onclick="uploadFile()">Upload</button>
             <p id="upload-status"></p>
@@ -220,7 +225,7 @@
 
         <!-- Download Section -->
         <div id="download" class="section">
-            <h4>Download File</h4>
+            <h5>Download File</h5>
             <input type="text" id="code-input" placeholder="Enter file code">
             <button onclick="fetchFile()">Get File</button>
             <p id="download-link"></p>
@@ -255,4 +260,5 @@
 
 </body>
 </html>
+
 
