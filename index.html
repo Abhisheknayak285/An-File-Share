@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Sharing</title>
+    <title>Text Sharing</title>
     <style>
-        /* Default Dark Theme */
+        /* Default (Dark) Theme */
         body {
             font-family: 'Poppins', sans-serif;
             text-align: center;
@@ -16,35 +16,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh; /* Ensure body covers the viewport */
             transition: all 0.3s ease-in-out;
         }
 
         .container {
-            max-width: 340px; /* Smaller size */
+            max-width: 500px;
             width: 90%;
-            padding: 15px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 12px;
             background: #1e1e1e;
-            box-shadow: 0 4px 10px rgba(0, 212, 255, 0.15);
+            box-shadow: 0 8px 20px rgba(0, 212, 255, 0.2);
             position: relative;
             transition: all 0.3s ease-in-out;
-            height: 300px; /* Fixed height */
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            /* height: 420px; Removed fixed height */
+            overflow: hidden; /* Keep overflow hidden for rounded corners and shadow */
         }
 
         /* Theme Toggle Button */
         .theme-toggle {
             position: absolute;
-            top: 8px;
-            right: 8px;
-            width: 32px;
-            height: 16px;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 20px;
             background: #333;
-            border-radius: 12px;
+            border-radius: 15px;
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -53,8 +50,8 @@
         }
 
         .theme-toggle .circle {
-            width: 12px;
-            height: 12px;
+            width: 16px;
+            height: 16px;
             background: white;
             border-radius: 50%;
             transition: transform 0.3s ease-in-out;
@@ -68,7 +65,7 @@
 
         .light-theme .container {
             background: white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
 
         .light-theme .theme-toggle {
@@ -76,7 +73,7 @@
         }
 
         .light-theme .theme-toggle .circle {
-            transform: translateX(14px);
+            transform: translateX(20px);
             background: black;
         }
 
@@ -84,23 +81,23 @@
         .toggle-buttons {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 12px;
-            padding: 4px;
-            border-radius: 8px;
-            gap: 6px;
+            margin-bottom: 20px;
+            padding: 8px;
+            border-radius: 10px;
+            gap: 12px;
         }
 
         .toggle-buttons button {
             flex: 1;
-            padding: 8px;
-            font-size: 12px;
+            padding: 14px;
+            font-size: 16px;
             cursor: pointer;
             border: none;
             background: #292929;
             color: #aaa;
             font-weight: bold;
             transition: all 0.3s ease-in-out;
-            border-radius: 5px;
+            border-radius: 6px;
         }
 
         .toggle-buttons button.active {
@@ -123,37 +120,50 @@
         }
 
         .section.active {
+            display: block;
+        }
+
+        /* Centering the Textarea */
+        .text-input-container {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
+            margin-top: 15px;
         }
 
-        /* Inputs & Buttons */
-        input, button {
-            width: 95%;
-            padding: 8px;
-            margin-top: 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            transition: all 0.3s ease-in-out;
-        }
-
-        input {
+        #text-input-upload, #code-input, #text-input-download {
+            width: 100%;
+            max-width: 280px;
+            text-align: center;
+            padding: 10px;
             border: 1px solid #555;
             background: #2c2c2c;
             color: #f5f5f5;
+            border-radius: 6px;
+            cursor: text;
         }
 
-        input:focus {
-            border-color: #00d4ff;
-            outline: none;
-            box-shadow: 0 0 4px rgba(0, 212, 255, 0.5);
-        }
-
-        .light-theme input {
+        .light-theme #text-input-upload, .light-theme #code-input, .light-theme #text-input-download {
             background: #fff;
             color: #000;
             border: 1px solid #ccc;
+        }
+
+        /* Inputs & Buttons */
+        textarea, input, button {
+            width: 100%;
+            padding: 14px;
+            margin-top: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+            resize: none;
+        }
+
+        textarea:focus, input:focus {
+            border-color: #00d4ff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.6);
         }
 
         button {
@@ -161,7 +171,7 @@
             color: white;
             border: none;
             font-weight: bold;
-            font-size: 12px;
+            font-size: 17px;
             cursor: pointer;
         }
 
@@ -175,64 +185,58 @@
         }
 
         /* Status and Links */
-        #upload-status, #file-code, #download-link {
-            margin-top: 8px;
-            font-size: 11px;
+        #upload-status, #text-code, #download-link {
+            margin-top: 12px;
+            font-size: 15px;
             font-weight: bold;
+            display: block; /* Ensure it takes up space for messages */
         }
 
-        #upload-status {
-            color: #00ff00;
-        }
-
-        #file-code {
-            color: #00d4ff;
-        }
-
-        #download-link a {
-            color: #00ff00;
-            text-decoration: none;
-            font-weight: bold;
-        }
-
-        #download-link a:hover {
-            text-decoration: underline;
+        #download-link.error, #upload-status.error {
+            color: red;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Theme Toggle Switch -->
         <div class="theme-toggle" onclick="toggleTheme()">
             <div class="circle"></div>
         </div>
 
-        <h4>File Sharing</h4>
+        <h2>Text Sharing Platform</h2>
         <div class="toggle-buttons">
-            <button id="upload-btn" class="active" onclick="toggleSection('upload')">Upload</button>
-            <button id="download-btn" onclick="toggleSection('download')">Download</button>
+            <button id="upload-btn" class="active" onclick="toggleSection('upload')">Share Text</button>
+            <button id="download-btn" onclick="toggleSection('download')">Retrieve Text</button>
         </div>
 
-        <!-- Upload Section -->
         <div id="upload" class="section active">
-            <h5>Upload File</h5>
-            <input type="file" id="file-input">
-            <button onclick="uploadFile()">Upload</button>
+            <h3>Enter Text</h3>
+            <div class="text-input-container">
+                <textarea id="text-input-upload" rows="5" placeholder="Enter your text here..."></textarea>
+            </div>
+            <button onclick="uploadText()">Share</button>
             <p id="upload-status"></p>
-            <p id="file-code"></p>
+            <p id="text-code"></p>
         </div>
 
-        <!-- Download Section -->
         <div id="download" class="section">
-            <h5>Download File</h5>
-            <input type="text" id="code-input" placeholder="Enter file code">
-            <button onclick="fetchFile()">Get File</button>
+            <h3>Retrieve Text</h3>
+            <div class="code-input-container">
+                <input type="text" id="code-input" placeholder="Enter text code">
+            </div>
+            <div class="text-input-container">
+                <textarea id="text-input-download" rows="5" placeholder="Retrieved text will appear here..." readonly></textarea>
+            </div>
+            <button onclick="fetchText()">Get Text</button>
             <p id="download-link"></p>
         </div>
     </div>
 
     <script>
+        // **IMPORTANT:** Replace with your actual Google Sheets Script URL
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzs-AbJUa2SB_VAGcIu4rmACK9u78E8fgvyDzwxl5KsvNclstv-R0fJHf8TMrMNIp8d/exec';
+
         function toggleSection(section) {
             document.getElementById("upload").classList.remove("active");
             document.getElementById("download").classList.remove("active");
@@ -241,6 +245,19 @@
             document.getElementById("upload-btn").classList.remove("active");
             document.getElementById("download-btn").classList.remove("active");
             document.getElementById(section + "-btn").classList.add("active");
+
+            // Clear input and output when switching sections
+            if (section === 'upload') {
+                document.getElementById('code-input').value = '';
+                document.getElementById('text-input-download').value = '';
+                document.getElementById('download-link').textContent = '';
+                document.getElementById('download-link').className = '';
+            } else if (section === 'download') {
+                document.getElementById('text-input-upload').value = '';
+                document.getElementById('upload-status').textContent = '';
+                document.getElementById('upload-status').className = '';
+                document.getElementById('text-code').textContent = '';
+            }
         }
 
         function toggleTheme() {
@@ -249,13 +266,113 @@
         }
 
         function loadTheme() {
-            const savedTheme = localStorage.getItem("theme");
-            if (savedTheme === "light") {
+            if (localStorage.getItem("theme") === "light") {
                 document.body.classList.add("light-theme");
             }
         }
 
         loadTheme();
+
+        function generateUniqueCode() {
+            return Math.random().toString(36).substring(2, 10).toUpperCase();
+        }
+
+        async function uploadText() {
+            const textInput = document.getElementById('text-input-upload');
+            const uploadStatus = document.getElementById('upload-status');
+            const textCodeDisplay = document.getElementById('text-code');
+            const text = textInput.value.trim();
+
+            if (!text) {
+                uploadStatus.textContent = 'Please enter some text.';
+                uploadStatus.className = 'error';
+                textCodeDisplay.textContent = '';
+                return;
+            }
+
+            uploadStatus.textContent = 'Uploading...';
+            uploadStatus.className = '';
+            textCodeDisplay.textContent = '';
+
+            const code = generateUniqueCode();
+            const formData = new FormData();
+            formData.append('action', 'upload');
+            formData.append('text', text);
+            formData.append('code', code);
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (data.result === 'success') {
+                    uploadStatus.textContent = 'Text shared successfully!';
+                    uploadStatus.className = '';
+                    textCodeDisplay.textContent = `Share this code to retrieve the text: ${code}`;
+                } else {
+                    uploadStatus.textContent = 'Failed to share text.';
+                    uploadStatus.className = 'error';
+                    textCodeDisplay.textContent = `Error: ${data.error}`;
+                }
+            } catch (error) {
+                uploadStatus.textContent = 'An error occurred during upload.';
+                uploadStatus.className = 'error';
+                textCodeDisplay.textContent = `Error: ${error.message}`;
+            } finally {
+                textInput.value = '';
+            }
+        }
+
+        async function fetchText() {
+            const codeInput = document.getElementById('code-input');
+            const downloadLinkDisplay = document.getElementById('download-link');
+            const textInputArea = document.getElementById('text-input-download');
+            const container = document.querySelector('.container');
+            const code = codeInput.value.trim().toUpperCase();
+
+            if (!code) {
+                downloadLinkDisplay.textContent = 'Please enter the text code.';
+                downloadLinkDisplay.className = 'error';
+                textInputArea.value = '';
+                return;
+            }
+
+            downloadLinkDisplay.textContent = 'Fetching text...';
+            downloadLinkDisplay.className = '';
+            textInputArea.value = '';
+            container.classList.add('fetching'); // Add a class during fetching
+
+            const formData = new FormData();
+            formData.append('action', 'download');
+            formData.append('code', code);
+
+            try {
+                const response = await fetch(scriptURL, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                const data = await response.json();
+
+                if (data.result === 'success') {
+                    textInputArea.value = data.text;
+                    downloadLinkDisplay.textContent = 'Text retrieved successfully!';
+                    downloadLinkDisplay.className = '';
+                } else {
+                    downloadLinkDisplay.textContent = 'Invalid text code or text not found.';
+                    downloadLinkDisplay.className = 'error';
+                }
+            } catch (error) {
+                downloadLinkDisplay.textContent = 'An error occurred while fetching the text.';
+                downloadLinkDisplay.className = 'error';
+            } finally {
+                codeInput.value = '';
+                container.classList.remove('fetching'); // Remove the class after fetching
+            }
+        }
     </script>
 
 </body>
