@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text Sharing</title>
+    <title>An Text Share</title>
     <style>
         /* Default (Dark) Theme */
         body {
@@ -204,7 +204,7 @@
             <div class="circle"></div>
         </div>
 
-        <h2>Text Sharing Platform</h2>
+        <h2>An Text Share Online</h2>
         <div class="toggle-buttons">
             <button id="upload-btn" class="active" onclick="toggleSection('upload')">Share Text</button>
             <button id="download-btn" onclick="toggleSection('download')">Retrieve Text</button>
@@ -273,9 +273,9 @@
 
         loadTheme();
 
-        function generateUniqueCode() {
-            return Math.random().toString(36).substring(2, 10).toUpperCase();
-        }
+     function generateUniqueCode() {
+    return Math.random().toString(36).substring(2, 6).toUpperCase();
+}
 
         async function uploadText() {
             const textInput = document.getElementById('text-input-upload');
@@ -290,7 +290,7 @@
                 return;
             }
 
-            uploadStatus.textContent = 'Uploading...';
+            uploadStatus.textContent = 'Sharing...';
             uploadStatus.className = '';
             textCodeDisplay.textContent = '';
 
